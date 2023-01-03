@@ -1,0 +1,1 @@
+Submissions to [#MapPromptMonday](https://github.com/MapPromptMonday)
