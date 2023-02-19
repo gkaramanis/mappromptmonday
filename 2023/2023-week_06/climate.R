@@ -31,13 +31,14 @@ pal <- MetBrewer::met.brewer("OKeeffe1")
 
 f1 <- "Outfit"
 
-plot_globe <- function(df, legend) {
+plot_globe <- function(df, legend, caption) {
   ggplot() +
   geom_sf_pattern(data = globe, pattern_fill = "#424144", pattern_fill2 = "black", color = NA, pattern = "gradient") +
   geom_raster(data = df, aes(x, y, fill = value)) +
-  scale_fill_gradientn(colors = rev(pal), rescaler = ~ scales::rescale_mid(.x, mid = 0), guide = guide_colorbar(direction = "horizontal", title.position = "top"), breaks = c(-40, -20, 0, 20), labels = c("-40", "-20", "0°C", "20")) +
+  scale_fill_gradientn(colors = rev(pal), rescaler = ~ scales::rescale_mid(.x, mid = 0), guide = guide_colorbar(direction = "horizontal", title.position = "top"), breaks = c(-40, -20, 0, 20, 40), labels = c("-40", "-20", "0°C", "20", "40")) +
   labs(
-    fill = legend
+    fill = legend,
+    caption = caption
   ) +
   theme_void(base_family = f1) +
   theme(
@@ -46,12 +47,13 @@ plot_globe <- function(df, legend) {
     legend.key.height = unit(0.6, "lines"),
     legend.text = element_text(color = "white"),
     legend.title = element_text(color = "white", hjust = 0.5),
-    plot.background = element_rect(fill = "grey15", color = NA)
+    plot.background = element_rect(fill = "grey15", color = NA),
+    plot.caption = element_text(color = "white", hjust = 0.5, margin = margin(0, 0, 10, 0))
   )
 }
 
-w <- plot_globe(wc_high_df, "Highest temperature of\nwarmest month, 1970-2000")
-c <- plot_globe(wc_low_df, "Lowest temperature of\ncoldest month, 1970-2000")
+w <- plot_globe(wc_high_df, "Highest temperature of the\nwarmest month, 1970-2000", "Graphic: Georgios Karamanis")
+c <- plot_globe(wc_low_df, "Lowest temperature of the\ncoldest month, 1970-2000", "Source: WordClim")
 
 
 c + w &
