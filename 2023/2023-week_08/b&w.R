@@ -26,11 +26,11 @@ f2 <- "Source Serif Pro"
 
 ggplot(nuts3_dist) +
   annotate("rect", xmin = -Inf, ymin = -Inf, xmax = Inf, ymax = Inf, fill = "grey99", color = "black", linewidth = 0.5) +
-  geom_sf(aes(fill = pct_no_station_within_3k), linewidth = 0.1) +
+  geom_sf(aes(fill = pct_no_station_within_5k), linewidth = 0.1) +
   coord_sf(xlim = c(-27.5, 47.5), ylim = c(30, 71)) +
   scale_fill_steps(low = "grey95", high = "black", na.value = NA, breaks = seq(0, 100, 10), labels = c("0%", "", "20%", "", "40%", "", "60%", "", "80%", "", "100%")) +
   labs(
-    title = "Percentage of population without a train station within 3 km",
+    title = "Percentage of population without a train station within 5 km",
     subtitle = "By NUTS 3 region, 2019",
     caption = "Source: The European Data Journalism Network · Graphic: Georgios Karamanis"
   ) +
