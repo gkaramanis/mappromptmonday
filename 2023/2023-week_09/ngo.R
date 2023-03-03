@@ -6,6 +6,7 @@ library(camcorder)
 gg_record(dir = "mappromptmonday-temp", device = "png", width = 9.2, height = 7, units = "in", dpi = 320)
 
 # Source: Food and Agriculture Organization of the United Nations
+# https://www.fao.org/3/i6338e/i6338e.pdf
 tree_area <- read_sf(here::here("2023/2023-week_09/data/Taxus_baccata/Taxus_baccata_area.shp"))
 tree_countries <- read_sf(here::here("2023/2023-week_09/data/Taxus_baccata/Taxus_baccata_countries.shp"))
 tree_locations <- read_sf(here::here("2023/2023-week_09/data/Taxus_baccata/Taxus_baccata_locations.shp"))
