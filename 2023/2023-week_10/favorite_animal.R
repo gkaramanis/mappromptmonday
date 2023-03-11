@@ -49,7 +49,7 @@ ggplot(eu_dogcats) +
                    label = label,
                    size = pets_pc), 
                lineheight = 0.85, family = f1, color = "grey10") +
-  scale_fill_stepsn(colors = MetBrewer::met.brewer("Morgenstern", direction = -1), na.value = "grey90", limits = c(0.5, 3.5), rescaler = ~ scales::rescale_mid(.x, mid = 1), labels = c("0.5\n(2 times\nmore dogs)", 1, "", 2, "", "3 times\nmore cats", "")) +
+  scale_fill_stepsn(colors = MetBrewer::met.brewer("Morgenstern", direction = -1), na.value = "grey90", limits = c(0.5, 3.5), rescaler = ~ scales::rescale_mid(.x, mid = 1), labels = c("0.5\n(2 times\nmore dogs)", 1, "", 2, "", "3\ntimes\nmore cats", "")) +
   scale_size_continuous(range = c(3, 5), guide = "none") +
   coord_sf(xlim = c(-24, 51), ylim = c(28, 74)) +
   labs(
