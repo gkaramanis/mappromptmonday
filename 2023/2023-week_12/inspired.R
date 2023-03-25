@@ -6,7 +6,7 @@ library(camcorder)
 gg_record(dir = "mappromptmonday-temp", device = "png", width = 13, height = 8, units = "in", dpi = 320)
 
 # Inspiration
-# https://twitter.com/MapsbyW/status/1623348572929536000/photo/1
+# https://twitter.com/MapsbyW/status/1623348572929536000/
 # Tutorial
 # https://twitter.com/TmarcoH/status/1611156932856893441
 
