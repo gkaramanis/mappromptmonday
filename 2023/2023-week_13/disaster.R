@@ -25,7 +25,8 @@ disasters <- disasters_raw %>%
   distinct() %>% 
   left_join(top_disasters)
 
-world <- rgeoboundaries::gb_adm0()
+world <- rgeoboundaries::gb_adm0() %>% 
+  rmapshaper::ms_simplify()
 
 disasters_sf <- world %>% 
   mutate(shapeISO = case_when(
@@ -61,11 +62,12 @@ ggplot(disasters_sf) +
   theme(
     legend.position = c(0.12, 0.5),
     legend.margin = margin(0, 0, 15, 0),
-    legend.title = element_text(family = f2, face = "bold"),
+    legend.title = element_text(family = f2, face = "bold", lineheight = 1, margin = margin(0, 0, 5, 0), size = 12),
     legend.text = element_text(margin = margin(0, 0, 0, 5)),
     plot.background = element_rect(fill = "grey99", color = NA),
-    panel.background = element_rect(fill = "#BFC9E5", color = NA),
+    panel.background = element_rect(fill = "#BFC9E0", color = NA),
     plot.title = element_text(size = 18, face = "bold", family = f2),
     plot.subtitle = element_text(margin = margin(5, 0, 10, 0), size = 12),
-    plot.margin = margin(10, 10, 10, 10)
+    plot.caption = element_text(margin = margin(10, 0, 0, 0)),
+    plot.margin = margin(10, 10, 5, 10)
   )
