@@ -46,6 +46,7 @@ ggplot(mdf %>% filter(v > 10) %>% left_join(codes, by = c("v" = "code"))) +
   theme(
     legend.position = c(0.12, 0.55),
     legend.title = element_text(face = "bold"),
-    plot.background = element_rect(fill = "white", color = NA)
+    plot.background = element_rect(fill = "white", color = NA),
+    plot.caption = element_text(margin = margin(0, 0, 10, 0))
   )
   
