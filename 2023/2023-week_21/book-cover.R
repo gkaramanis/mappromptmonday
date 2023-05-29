@@ -17,7 +17,21 @@ nuts_smooth <- nuts_area %>%
 eu_text <- string2path("EUROPE", font = "DIN Condensed") %>% 
   mutate(
     x = x * 15 + 3,
-    y = y * 15 + 18
+    y = y * 15 + 20
+    ) %>% 
+  st_as_sf(coords = c("x", "y"), crs = 4326) %>% 
+  group_by(glyph_id) %>% 
+  summarize(do_union = FALSE) %>%
+  st_cast("LINESTRING") %>% 
+  st_cast("POLYGON") %>% 
+  ungroup() %>% 
+  rmapshaper::ms_simplify(0.25) %>%
+  sfdct::ct_triangulate() 
+
+gk_text <- string2path(str_to_upper("By Georgios Karamanis"), font = "DIN Condensed") %>% 
+  mutate(
+    x = x * 4.5 + 3.5,
+    y = y * 4.5 + 15
     ) %>% 
   st_as_sf(coords = c("x", "y"), crs = 4326) %>% 
   group_by(glyph_id) %>% 
@@ -32,11 +46,14 @@ ggplot(nuts_smooth) +
   geom_sf(data = coast, fill = NA) +
   geom_sf(fill = NA, linewidth = 0.1) +
   geom_sf(data = eu_text, fill = "grey99") +
+  geom_sf(data = gk_text, fill = "grey99") +
   scale_color_viridis_d(option = "turbo") +
-  coord_sf(crs = "+proj=aea +lat_1=30 +lat_2=60 +lat_0=0 +lon_0=25 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs", default_crs = sf::st_crs(4326), xlim = c(-22, 52.5), ylim = c(16, 85)) +
+  coord_sf(crs = "+proj=aea +lat_1=30 +lat_2=60 +lat_0=0 +lon_0=25 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs", default_crs = sf::st_crs(4326), xlim = c(-22, 52.5), ylim = c(16, 85.7)) +
   theme_void() +
   theme(
     legend.position = "none",
-    plot.background = element_rect(fill = "grey99")
+    plot.background = element_rect(fill = "grey99", color = "black"),
+    panel.background = element_rect(fill = NA, color = "black"),
+    plot.margin = margin(10, 10, 10, 10)
   )
 
