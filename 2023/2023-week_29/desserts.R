@@ -6,7 +6,7 @@ gg_record(dir = "mappromptmonday-temp", device = "png", width = 11, height = 8, 
 
 # In thousand euros 
 # https://www.trademap.org/Country_SelProduct_TS.aspx?nvpm=1%7c%7c25%7c%7c%7c1806%7c%7c%7c4%7c1%7c1%7c3%7c2%7c1%7c3%7c1%7c1%7c1
-chocolate <- read_tsv("~/Downloads/Trade_Map_-_List_of_markets_for_the_selected_product_(Chocolate_and_other_food_preparations_containing_cocoa).txt") %>% 
+chocolate <- read_tsv(here::here("2023/2023-week_29/data/Trade_Map_-_List_of_markets_for_the_selected_product_(Chocolate_and_other_food_preparations_containing_cocoa).txt")) %>% 
   janitor::clean_names()
   
 choc_eu <- chocolate %>% 
@@ -40,7 +40,7 @@ f1 <- "Outfit"
 f2 <- "Publico Headline"
 
 ggplot(choc_eu_sf) +
-  geom_sf(data = world_sf, color = "grey99", fill = "grey85") +
+  geom_sf(data = world_sf, color = "grey99", fill = "#D4D0CE") +
   geom_sf(data = . %>% filter(continent == "Europe"), aes(fill = balance_m)) +
   # Top 5 import - export (Right map) 
   shadowtext::geom_shadowtext(data = . %>% filter(admin %in% (choc_eu %>% slice_max(order_by = balance_m, n = 5) %>% pull(country))), aes(geometry = geometry, label = scales::number(balance_m), size = abs(balance_m)), color = "black", family = f1, stat = "sf_coordinates", bg.color = "grey99") +
@@ -54,7 +54,7 @@ ggplot(choc_eu_sf) +
   facet_wrap(vars(balance_in_value_in_2022 > 0)) +
   labs(
     title = "Chocolate imports and exports",
-    subtitle = "Balance between imported and exported value for chocolate and other food preparations containing cocoa. In million euro (2022).",
+    subtitle = "Balance in million euros between imported and exported value for chocolate and other food preparations containing cocoa (2022).",
     caption = "Source: ITC Trade Map · Graphic: Georgios Karamanis",
     fill = paste0("More imports", strrep(" ", 29), "More exports")
   ) +
